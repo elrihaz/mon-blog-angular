@@ -9,7 +9,7 @@ import { PostListItemComponent } from './post-list-item/post-list-item.component
   declarations: [
     AppComponent,
     PostListComponent,
-    PostListItemComponent
+    PostListItemComponent    
   ],
   imports: [
     BrowserModule
