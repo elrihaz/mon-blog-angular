@@ -1,17 +1,17 @@
 <li [ngClass]="{    'list-group-item': true,
-                    'list-group-item-success': loveIts > 0,
-                    'list-group-item-danger': loveIts < 0 }">
+                    'list-group-item-success': post.loveIts > 0,
+                    'list-group-item-danger': post.loveIts < 0 }">
 
   <div class="en-tete-post">
     <div>
-      <h2 class="gras"> {{ title }} </h2>
+      <h2> {{ post.title }} </h2>
     </div>
     <div>
-      <p class="gris"> {{ created_at | date: 'short' | uppercase }} </p>
+      <p class="gris"> {{ post.created_at | date: 'short' | uppercase }} </p>
     </div>
   </div>
 
-  <p class="p-content"> {{ content }} </p>
+  <p class="p-content"> {{ post.content }} </p>
 
   <button   class="btn btn-success btn-blog"
             (click)="onLoveIt()">Love it!</button>
