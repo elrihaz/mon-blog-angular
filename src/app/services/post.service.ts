@@ -1,20 +1,61 @@
-import { Post } from '../Models/post';
+import { Post } from '../Models/post.model';
+import { Subject } from 'rxjs';
+import * as firebase from 'firebase';
+import { Injectable } from '@angular/core';
+import DataSnapshot = firebase.database.DataSnapshot;
 
+@Injectable()
 export class PostService {
 
-    // tableau contenant les post
-    post1: Post = new Post('Mon premier post', 'Nec sane cuius Gabini insignem conciderit ignominia una conciderit.', 1);
-    post2: Post = new Post('Mon deuxième post', 'Ignobiles adsueti accepta quosdam quod quosdam mercede vitant venditare.', -2);
-    post3: Post = new Post('Encore un post', 'Inviti fabulis reiciat hoc Graecis reiciat est facere aut inimicus primum Antiopam.', 0);
+    posts: Post[] = [];
+    postsSubject = new Subject<Post[]>();
 
-    posts: Array<Post> = [this.post1, this.post2, this.post3];
+    emitPosts() {
+        this.postsSubject.next(this.posts);
+      }
+
+    savePosts() {
+        firebase.database().ref('/posts').set(this.posts);
+    }
+
+    getPosts() {
+        firebase.database().ref('/posts')
+        .on('value', (data: DataSnapshot) => {
+            this.posts = data.val() ? data.val() : [];
+            this.emitPosts();
+        }
+        );
+    }
 
     onLovePost(index: number) {
         this.posts[index].loveIts++;
+        this.savePosts();
+        this.emitPosts();
     }
 
     onDontLovePost(index: number) {
         this.posts[index].loveIts--;
+        this.savePosts();
+        this.emitPosts();
+    }
+
+    createNewPost(newPost: Post) {
+        this.posts.push(newPost);
+        this.savePosts();
+        this.emitPosts();
+    }
+
+    removePost(post: Post) {
+        const postIndexToRemove = this.posts.findIndex(
+            (postEl) => {
+                if (postEl === post) {
+                    return true;
+                }
+            }
+        );
+        this.posts.splice(postIndexToRemove, 1);
+        this.savePosts();
+        this.emitPosts();
     }
 
 }
