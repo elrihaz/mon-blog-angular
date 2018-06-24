@@ -12,10 +12,10 @@ export class PostListComponent implements OnInit {
 
   postsList: Array<Post>;
 
-  constructor(private postService:PostService) { }
+  constructor(private postService: PostService) { }
 
   ngOnInit() {
-    this.postsList=this.postService.posts;
+    this.postsList = this.postService.posts;
   }
 
 }

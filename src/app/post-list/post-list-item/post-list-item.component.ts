@@ -1,5 +1,5 @@
 import { PostService } from './../../services/post.service';
-import {Post} from './../../Models/post'
+import {Post} from './../../Models/post';
 import { Component, Input } from '@angular/core';
 
 @Component({
@@ -12,15 +12,15 @@ export class PostListItemComponent {
   @Input() post: Post;
   @Input() index: number;
 
-  constructor(private postService:PostService) {}
+  constructor(private postService: PostService) {}
 
   onLoveIt() {
     this.postService.onLovePost(this.index);
-    //this.post.loveIts = this.postService.posts[this.index].loveIts;
+    // this.post.loveIts = this.postService.posts[this.index].loveIts;
   }
 
   onDontLoveIt() {
     this.postService.onDontLovePost(this.index);
-    //this.loveIts = this.postService.posts[this.index].loveIts;
+    // this.loveIts = this.postService.posts[this.index].loveIts;
   }
 }
