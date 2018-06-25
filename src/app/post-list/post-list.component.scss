@@ -1,0 +1,11 @@
+.en-tete {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;   
+}
+
+a {
+    margin-left: 10px;
+    cursor: pointer;
+    text-decoration: none;
+}

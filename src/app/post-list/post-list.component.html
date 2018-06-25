@@ -1,14 +1,21 @@
 <div class="row">
   <div class="col-xs-12">
 
+    <div class="en-tete">
+      <div>
+        <h1>Posts</h1>
+      </div>
+      
+      <div class="en-tete">
+        <a (click)="onTriTitre()">Trier par titre</a>
+        <a (click)="onTriDate()" >Trier par date</a>
+      </div>
 
-    <h1 class="gras">Posts</h1>
+    </div>
 
-    <ul class="list-group">
+    <ul class="list-group" style="margin-top: 10px;">
       <app-post-list-item *ngFor="let post of posts, let i=index" [post]="post" [index]="i"></app-post-list-item>
     </ul>
-
-    <button class="btn btn-primary" (click)="onNewPost()">Nouveau post</button>
 
   </div>
 </div>

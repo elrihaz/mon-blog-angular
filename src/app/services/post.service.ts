@@ -58,4 +58,42 @@ export class PostService {
         this.emitPosts();
     }
 
+    triTitrePosts(posts: Post[]) {
+        let tab_en_ordre = false;
+        let taille = posts.length;
+        while (!tab_en_ordre) {
+            tab_en_ordre = true;
+            for (let i = 0 ; i < taille - 1 ; i++) {
+                if (posts[i].title.toLocaleUpperCase() > posts[i + 1].title.toLocaleUpperCase()) {
+                    const tempPost = posts[i];
+                    posts[i] = posts[i + 1];
+                    posts[i + 1] = tempPost;
+                    tab_en_ordre = false;
+                }
+            }
+            taille--;
+        }
+        this.emitPosts();
+    }
+
+    triDatePosts(posts: Post[]) {
+        let tab_en_ordre = false;
+        let taille = posts.length;
+        while (!tab_en_ordre) {
+            tab_en_ordre = true;
+            for (let i = 0 ; i < taille - 1 ; i++) {
+                const dateI = new Date(posts[i].createdAt);
+                const dateIPlus1 = new Date(posts[i + 1].createdAt);
+                if (dateI > dateIPlus1) {
+                    const tempPost = posts[i];
+                    posts[i] = posts[i + 1];
+                    posts[i + 1] = tempPost;
+                    tab_en_ordre = false;
+                }
+            }
+            taille--;
+        }
+        this.emitPosts();
+    }
+
 }
